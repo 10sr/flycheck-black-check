@@ -76,14 +76,15 @@ For argument OUTPUT, CHECKER, and BUFFER refer to doc of `flycheck-define-comman
       (save-match-data
         (goto-char (point-min))
         (when (re-search-forward "^would reformat .*$" nil t)
-          (add-to-list 'result (flycheck-error-new-at
-                                (point-min)
-                                nil
-                                'error
-                                ;;(format "Black: %s" (match-string 0))
-                                "Black: would reformat"
-                                :buffer buffer
-                                :checker checker)))
+          (push (flycheck-error-new-at
+                 (point-min)
+                 nil
+                 'error
+                 ;;(format "Black: %s" (match-string 0))
+                 "Black: would reformat"
+                 :buffer buffer
+                 :checker checker)
+                'result))
         (goto-char (point-min))
         (when (re-search-forward "^error: .*$" nil t)
           (add-to-list 'result (flycheck-error-new-at
