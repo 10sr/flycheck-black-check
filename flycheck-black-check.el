@@ -84,7 +84,7 @@ For argument OUTPUT, CHECKER, and BUFFER refer to doc of `flycheck-define-comman
                  "Black: would reformat"
                  :buffer buffer
                  :checker checker)
-                'result))
+                result))
         (goto-char (point-min))
         (when (re-search-forward "^error: .*$" nil t)
           (push (flycheck-error-new-at
@@ -95,7 +95,7 @@ For argument OUTPUT, CHECKER, and BUFFER refer to doc of `flycheck-define-comman
                  (format "Black: %s" (match-string 0))
                  :buffer buffer
                  :checker checker)
-                'result))))
+                result))))
     result))
 
 ;; (defun my-flycheck-parse-unified-diff (output checker buffer)
