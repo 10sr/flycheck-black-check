@@ -87,14 +87,15 @@ For argument OUTPUT, CHECKER, and BUFFER refer to doc of `flycheck-define-comman
                 'result))
         (goto-char (point-min))
         (when (re-search-forward "^error: .*$" nil t)
-          (add-to-list 'result (flycheck-error-new-at
-                                (point-min)
-                                nil
-                                'error
-                                ;; Fix not to include absolute file path
-                                (format "Black: %s" (match-string 0))
-                                :buffer buffer
-                                :checker checker)))))
+          (push (flycheck-error-new-at
+                 (point-min)
+                 nil
+                 'error
+                 ;; Fix not to include absolute file path
+                 (format "Black: %s" (match-string 0))
+                 :buffer buffer
+                 :checker checker)
+                'result))))
     result))
 
 ;; (defun my-flycheck-parse-unified-diff (output checker buffer)
