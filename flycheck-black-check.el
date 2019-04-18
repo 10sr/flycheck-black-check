@@ -24,6 +24,9 @@
 ;;; Commentary:
 
 ;; Flycheck black check.
+;; (eval-after-load 'flycheck
+;;   '(add-hook 'flycheck-mode-hook #'flycheck-black-check-setup))
+
 
 ;;; Code:
 
@@ -63,8 +66,6 @@
 (flycheck-def-config-file-var flycheck-black python-black-check "pyproject.toml"
   :safe #'stringp)
 
-(add-to-list 'flycheck-checkers
-             'python-black-check)
 
 (defun flycheck-black-check-parse (output checker buffer)
   "Flycheck parser to check if reformat is required.
@@ -126,7 +127,12 @@ For argument OUTPUT, CHECKER, and BUFFER refer to doc of `flycheck-define-comman
 ;;                     :group hunk)))
 ;;     result))
 
-
+;;;###autoload
+(defun flycheck-black-check-setup ()
+  "Setup Flycheck black-check."
+  (interactive)
+  (add-to-list 'flycheck-checkers
+               'python-black-check))
 
 (provide 'flycheck-black-check)
 
