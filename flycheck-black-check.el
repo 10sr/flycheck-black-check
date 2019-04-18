@@ -67,7 +67,8 @@
              'python-black-check)
 
 (defun flycheck-black-check-parse (output checker buffer)
-  "Flycheck parser to check if reformat is required."
+  "Flycheck parser to check if reformat is required.
+For argument OUTPUT, CHECKER, and BUFFER refer to doc of `flycheck-define-command-checker'."
   (let ((result nil))
     (with-temp-buffer
       (insert output)
